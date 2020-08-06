@@ -21,9 +21,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #path('accounts/', include('allauth.urls')),
     #path('accounts/login/' , views.login , name = 'login'),
-    #path('accounts/signup/' , views.signup , name = 'sign up'),
+    #path('uaccounts/signup/' , views.signup , name = 'sign up'),
     path('', views.index , name = 'index'),
     path('dashboard/', views.dashboard , name = 'dashboard'),
     path('stats/', views.stats , name = 'stats'),
     path('schedule/', views.schedule , name = 'schedule'),
+    path('uaccounts/', include('user_accounts.urls')),
 ]

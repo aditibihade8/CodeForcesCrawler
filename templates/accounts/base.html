@@ -144,8 +144,16 @@
         {% endblock %}</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group mr-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Login</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Sign Up</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary">
+              <a href="{% url 'login' %}">
+                Login
+              </a>
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-secondary">
+              <a href="{% url 'signup' %}">
+                Sign Up
+              </a>
+            </button>
           </div>
           <!-- <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
             <span data-feather="calendar"></span>

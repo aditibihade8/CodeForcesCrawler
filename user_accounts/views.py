@@ -1,6 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .forms import RegisterForm 
+
 import requests
 from bs4 import BeautifulSoup
+
+
 
 # Create your views here.
 
@@ -28,9 +32,27 @@ def tt_generator() :
     del rows[0]
     #rows
     #cols = rows[1].find_all('td')
-
+    cnt = 0
+    
     for row in rows :
         cols = row.find_all('td')
         cols = [x.text.strip() for x in cols]
         
         yield cols
+
+
+def signup(response):
+    if response.method == 'POST':
+        form = RegisterForm(response.POST)
+        if form.is_valid() :
+            form.save()
+        return redirect('/dashboard')
+
+    else :
+        form = RegisterForm()
+    return render(response, 'accounts/signup.html', {"form" : form})
+
+
+
+def login(request):
+    return render(request, 'accounts/login.html')
