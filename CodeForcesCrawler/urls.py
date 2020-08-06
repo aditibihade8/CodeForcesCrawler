@@ -27,4 +27,5 @@ urlpatterns = [
     path('stats/', views.stats , name = 'stats'),
     path('schedule/', views.schedule , name = 'schedule'),
     path('uaccounts/', include('user_accounts.urls')),
+    path('', include('django.contrib.auth.urls')),
 ]

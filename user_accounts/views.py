@@ -27,7 +27,10 @@ def tt_generator() :
     
     page = requests.get("http://codeforces.com/contests")
     soup = BeautifulSoup(page.content, 'html.parser')
+    #table1 = []
     table1 = soup.find('div' , attrs = {'class' : 'datatable'})
+    if table1 is None:
+        return
     rows = table1.find_all('tr')
     del rows[0]
     #rows
