@@ -7,7 +7,12 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-    <title>Dashboard Template · Bootstrap</title>
+    <title>{% block title %}  {% endblock %}</title>
+    {% load static %}
+
+    <script type="text/javascript" src="{% static 'fusioncharts/fusioncharts.js' %}"></script>
+      <script type="text/javascript" src="{% static 'fusioncharts/fusioncharts.charts.js' %}"></script>
+      <script type="text/javascript" src="{% static 'fusioncharts/themes/fusioncharts.theme.fusion.js' %}"></script>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
 
@@ -50,12 +55,15 @@
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+  {% if user.is_authenticated %}
   <input class="form-control form-control-dark w-100" type="text" placeholder="Search user handle" aria-label="Search">
+
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
       <a class="nav-link" href="{% url 'logout' %}">Sign out</a>
     </li>
   </ul>
+  {% endif %}
 </nav>
 
 <div class="container-fluid">
@@ -75,12 +83,14 @@
               Admin
             </a>
           </li>
+          {% if user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'stats' %}">
               <span data-feather="shopping-cart"></span>
               Contest Stats
             </a>
           </li>
+          {% endif %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'schedule' %}">
               <span data-feather="users"></span>
@@ -140,8 +150,8 @@
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">{% block title %} 
-        {% endblock %}</h1>
+        
+        {% if not user.is_authenticated %}
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group mr-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">
@@ -149,17 +159,20 @@
                 Login
               </a>
             </button>
+            
             <button type="button" class="btn btn-sm btn-outline-secondary">
               <a href="{% url 'signup' %}">
                 Sign Up
               </a>
             </button>
+            
           </div>
           <!-- <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
             <span data-feather="calendar"></span>
             This week
           </button> -->
         </div>
+        {% endif %}
       </div>
       {% block content %}
       {% endblock %}
